@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            background-color: #151515;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 300px;
+            background-color: #222;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        h2 {
+            color: gold;
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="password"] {
+            width: calc(100% - 20px); /* Largura com padding */
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            background-color: transparent;
+            color: white;
+            text-align: center;
+            border-bottom: 2px solid gold; /* Linha embaixo do campo */
+            outline: none;
+            margin-bottom: 20px; /* Espaço abaixo do campo */
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: gold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #FFD700;
+        }
+        .token-input {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <div class="login-form" id="loginForm">
+            <form onsubmit="return false;"> <!-- Impede o envio padrão do formulário -->
+                <input type="text" id="email" placeholder="E-mail" required>
+                <input type="password" id="password" placeholder="Senha" required>
+                <button type="button" onclick="sendToken()">Entrar</button>
+            </form>
+        </div>
+        <div class="token-input" id="tokenInput">
+            <input type="text" id="token" placeholder="Código do Token" required>
+            <button onclick="validateToken()">Validar Token</button>
+        </div>
+    </div>
+
+    <script>
+        function sendToken() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Verifica se os campos estão preenchidos
+            if (email === '' || password === '') {
+                alert('Por favor, preencha todos os campos.');
+                return; // Sai da função se algum campo estiver vazio
+            }
+
+            // Verificação simples de email e senha
+            const validEmail = "usuario@example.com"; // Exemplo de email válido
+            const validPassword = "senha123"; // Exemplo de senha válida
+
+            if (email === validEmail && password === validPassword) {
+                // Aqui você deve adicionar a lógica para verificar o login
+                // Se o login for bem-sucedido, exiba o campo do token
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('tokenInput').style.display = 'block';
+
+                // Aqui você pode implementar o envio do código para o e-mail
+                alert('Um código de token foi enviado para ' + email);
+            } else {
+                alert('E-mail ou senha inválidos. Tente novamente.');
+            }
+        }
+
+        function validateToken() {
+            const token = document.getElementById('token').value;
+
+            // Aqui você deve adicionar a lógica para validar o token
+            // Se o token estiver correto, redirecione para o site ou mostre uma mensagem de sucesso
+            if (token === '123456') { // Simulação de token correto
+                alert('Token validado com sucesso! Você pode navegar no site.');
+                // Aqui você pode redirecionar o usuário para a página principal
+                window.location.href = "pagina-principal.html"; // Altere para a página que deseja redirecionar
+            } else {
+                alert('Token inválido, tente novamente.');
+            }
+        }
+    </script>
+</body>
+</html>
